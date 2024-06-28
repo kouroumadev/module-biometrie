@@ -7,6 +7,7 @@ use App\Models\Otp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class BiometrieController extends Controller
 {
@@ -110,7 +111,16 @@ class BiometrieController extends Controller
 
     public function SendDemande(Request $request)
     {
-        dd($request->all());
+        $no_dossier = uniqid();
+        $file = $request->file('fichier')->getClientOriginalName();
+        $filename = pathinfo($file, PATHINFO_FILENAME);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        $img = $no_dossier.'.'.$extension;
+        Storage::disk('bioDoc')->put($img, file_get_contents($request->file('fichier')));
+
+        dd('done');
+
     }
     ///BACKEND
 

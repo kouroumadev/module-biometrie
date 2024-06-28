@@ -114,7 +114,9 @@
 
                 <section class="form-wrapper">
                     <div class="form-container">
-                        <form action="" method="post" id="multi-step-form">
+                        <form action="{{ route('send.demande') }}" method="post" id="multi-step-form"
+                            enctype="multipart/form-data">
+                            @csrf
                             <div id="form-container-box">
                                 <h1 class="form-title">Démande d'enrollement Biometrie</h1>
                                 <ul class="custom-progress-bar">
@@ -303,9 +305,9 @@
                                     <table class="table table-bordered">
 
                                         <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                 <th scope="row" colspan="2">1.IDENTIFICATION DE L'ENTREPRISE</th>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
                                                 <td scope="row">Numero Employeur</td>
                                                 <td scope="row" id="no_emp_recap"></td>
@@ -348,7 +350,7 @@
                                     <div class="mb-3 form-group">
                                         <button type="button" class="btn btn-primary " id="step-prev-3"> &#65513;
                                             Precedent</button>
-                                        <button type="button" class="btn btn-success " id="step-next-4" disabled>Validé
+                                        <button type="submit" class="btn btn-success " id="step-next-4" disabled>Validé
                                             &#65515;</button>
                                     </div>
                                 </div>
@@ -733,7 +735,7 @@
                             $('#step-group-2').hide();
                             $('#step-group-3').show();
 
-                            $('#step-3').removeClass("active");
+                            $('#step-3').addClass("active");
 
 
                         } else {
