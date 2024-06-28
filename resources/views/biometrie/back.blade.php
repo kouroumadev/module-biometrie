@@ -57,10 +57,13 @@
             <div class="tab">
                 <ul class="nav nav-tabs customtab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active text-success text-uppercase" data-toggle="tab" href="#home5" role="tab" aria-selected="true">Dossiers non traité(s): 12</a>
+                        <a class="nav-link active text-warning text-uppercase font-weight-bold" data-toggle="tab" href="#home5" role="tab" aria-selected="true">Dossiers en attente de validation: 12</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-success text-uppercase" data-toggle="tab" href="#profile5" role="tab" aria-selected="false">Dossiers traité(s): 55</a>
+                        <a class="nav-link text-success text-uppercase font-weight-bold" data-toggle="tab" href="#profile5" role="tab" aria-selected="false">Dossiers validé(s): 55</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger text-uppercase font-weight-bold" data-toggle="tab" href="#profile15" role="tab" aria-selected="false">Dossiers réjété(s): 55</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -178,10 +181,10 @@
                                                         @csrf
                                                         <div class="row m-2 ">
                                                                 <div class="col-md-12 bg-success p-1">
-                                                                    <h5 class="text-center text-white">Feedback après traitement du dossier</h5>
+                                                                    <h5 class="text-center text-white">Éligibilité du Dossier (DQE)</h5>
                                                                 </div>
                                                                 <div class="col-md-12 form-group mt-2">
-                                                                    <label class="weight-600">Éligibilité du dossier</label>
+                                                                    {{-- <label class="weight-600">Éligibilité du dossier</label> --}}
                                                                     <div class="custom-control custom-radio mb-5">
                                                                         <input type="radio" value="oui" id="customRadio1" name="customRadio" class="custom-control-input">
                                                                         <label class="custom-control-label" for="customRadio1">OUI Ce dossier est éligible pour la biometrie</label>
@@ -203,9 +206,9 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" id="" class="btn btn-warning">Cloturer le dossier</button>
+                                                        <button type="submit" id="" class="btn btn-success">Valider</button>
                                                         {{-- <a href="{{ route('reclamation.home.done',$rec->id ) }}" class="btn btn-warning">Cloturer le dossier <i class="fa fa-print" aria-hidden="true"></i></a> --}}
-                                                        <a href="#" class="btn btn-success">Voir la fiche de reclamation <i class="fa fa-print" aria-hidden="true"></i></a>
+                                                        {{-- <a href="#" class="btn btn-success">Voir la fiche de reclamation <i class="fa fa-print" aria-hidden="true"></i></a> --}}
                                                     </div>
                                                 </form>
                                                 </div>
@@ -220,6 +223,39 @@
                     </div>
 
                     <div class="tab-pane fade" id="profile5" role="tabpanel">
+                        <div class="pd-20">
+                            <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
+                                <div class="pd-20">
+                                    <h4 class="text-blue h4">Liste des demandes traités</h4>
+                                </div>
+                                <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
+                                    role="grid" aria-describedby="DataTables_Table_0_info">
+                                    <thead class="bg-success">
+                                        <tr>
+                                            <th class="table-plus text-white">N° Dossier</th>
+                                            <th class="table-plus text-white">N° Immat/Pension</th>
+                                            <th class="text-white">Prenom & Nom/Employeur</th>
+                                            {{-- <th class="text-white">Date Naissance</th>
+                                            <th class="text-white">Email</th>
+                                            <th class="text-white">Adresse</th>
+                                            <th class="text-white">Telephone</th> --}}
+                                            <th class="text-white">Type</th>
+                                            {{-- <th class="text-white">Prestation</th> --}}
+                                            {{-- <th class="text-white">Motif(s)</th>
+                                            <th class="text-white">Details</th> --}}
+                                            <th class="datatable-nosort text-white">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="profile15" role="tabpanel">
                         <div class="pd-20">
                             <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
                                 <div class="pd-20">
