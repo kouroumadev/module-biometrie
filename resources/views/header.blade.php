@@ -17,7 +17,7 @@
                         style="margin-left:10px; font-size:12px">Gestion rendez-vous</a>
 
 
-                    
+
                 </div>
                 <div class="col-md-3" style="margin-top: 15px">
                     <a href="{{ route('rendezvous.gestion') }}" type="button" class="btn btn-outline-success"
@@ -106,14 +106,14 @@
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
                             <li>
-                                <a href="{{ route('rendezvous.gestion') }}">
+                                <a href="#">
                                     <i class="icon-copy fa fa-edit" aria-hidden="true"></i>
                                     <h3>Gérer mes rendez-vous</h3>
 
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('rendezvous.prendre') }}">
+                                <a href="#">
                                     <i class="icon-copy fa fa-calendar"></i>
                                     <h3>Prise de rendez-vous</h3>
                                 </a>

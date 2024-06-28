@@ -158,46 +158,9 @@
             })
         })
 
-        function returnRef() {
-            // var mission_id = document.getElementById('mission_id').value;
-            // var mission_id = $("#miss_id").val();
-            //alert(id);
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('rendezvous.prendre') }}",
-                dataType: 'json',
-                // data: {
-                //     id: id
-                // },
-                success: function() {
-
-                }
-            })
 
 
-        }
 
-        // function getPrestation() {
-        //     // var mission_id = document.getElementById('mission_id').value;
-        //     var nature = $("#nature").val();
-        //     //alert(mission_id);
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: "{{ route('prestation.ajax') }}",
-        //         dataType: 'json',
-        //         data: {
-        //             nature: nature
-        //         },
-        //         success: function(data) {
-        //             // console.log(data);
-        //             $('select[name="subsubcategory_id"]').html('');
-        //             var d = $('select[name="prestation"]').empty();
-        //             $.each(data, function(key, value) {
-        //                 $('select[name="prestation"]').append('<option value="' + value.id + '">' +
-        //                     value.libelle + '</option>')
-        //             })
-        //         }
-        //     })
 
 
         // }
