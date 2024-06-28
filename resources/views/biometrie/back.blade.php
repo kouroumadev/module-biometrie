@@ -71,7 +71,7 @@
                         <div class="pd-20">
                             <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
                                 <div class="pd-20">
-                                    <h4 class="text-blue h4">Liste des demandes non traités</h4>
+                                    <h4 class="text-blue h4">Liste des dossiers non validés</h4>
                                 </div>
                                 <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
                                     role="grid" aria-describedby="DataTables_Table_0_info">
@@ -96,13 +96,7 @@
                                         <td class="font-weight-bold">{{ $d->no_employeur }}</td>
                                         <td>{{ $d->raison_sociale }}</td>
                                         <td>
-                                            <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
-                                                {{-- <span class="badge"> --}}
-                                                    Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
-                                                    </span> --}}
-                                                {{-- </span> --}}
-                                            </a>
+
                                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-procla-{{ $d->id }}" type="button">
                                                 {{-- <span class="badge"> --}}
                                                     Traitement
@@ -226,20 +220,20 @@
                         <div class="pd-20">
                             <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
                                 <div class="pd-20">
-                                    <h4 class="text-blue h4">Liste des demandes traités</h4>
+                                    <h4 class="text-blue h4">Liste des dossiers validés</h4>
                                 </div>
                                 <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
                                     role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead class="bg-success">
                                         <tr>
-                                            <th class="table-plus text-white">N° Dossier</th>
+                                            {{-- <th class="table-plus text-white">N° Dossier</th> --}}
                                             <th class="table-plus text-white">N° Immat/Pension</th>
                                             <th class="text-white">Prenom & Nom/Employeur</th>
                                             {{-- <th class="text-white">Date Naissance</th>
                                             <th class="text-white">Email</th>
                                             <th class="text-white">Adresse</th>
                                             <th class="text-white">Telephone</th> --}}
-                                            <th class="text-white">Type</th>
+                                            {{-- <th class="text-white">Type</th> --}}
                                             {{-- <th class="text-white">Prestation</th> --}}
                                             {{-- <th class="text-white">Motif(s)</th>
                                             <th class="text-white">Details</th> --}}
@@ -247,8 +241,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($data as $d)
+                                        <td class="font-weight-bold">{{ $d->no_employeur }}</td>
+                                        <td>{{ $d->raison_sociale }}</td>
+                                        <td>
+                                            <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
+                                                {{-- <span class="badge"> --}}
+                                                    Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
+                                                    </span> --}}
+                                                {{-- </span> --}}
+                                            </a>
+
+                                        </td>
 
 
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
