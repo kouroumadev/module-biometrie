@@ -11,28 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule ^(.*)$ public/$1 [L]
-</IfModule>
-
-
-// MAIL_MAILER=smtp
-// MAIL_HOST=mail.cnss.gov.gn
-// MAIL_PORT=465
-// MAIL_USERNAME=reclamation@cnss.gov.gn
-// MAIL_PASSWORD=5JP&3]-zUgzR
-
-// mail.reclamation.doneClient
-
-
-|
 */
-/*<span class="badge " style="background-color: rgb(229, 67, 42); text-align:center">
-En retard
-<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">
-</span>
-</span>*/
 
 //AUTHENTICATION ROUTES
 Route::get('/registration', [
