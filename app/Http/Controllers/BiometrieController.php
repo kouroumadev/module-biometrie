@@ -12,6 +12,7 @@ class BiometrieController extends Controller
 {
     public function BiometrieIndex()
     {
+        dd('hello');
         return view('biometrie.index');
     }
 

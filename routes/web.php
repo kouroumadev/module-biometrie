@@ -62,10 +62,6 @@ Route::get('/logout', [App\Http\Controllers\AuthenController::class, 'logout'])
     ->name('logout')
     ->middleware('authCheck');
 
-Route::get('/', function () {
-    return view('rendezvous.index');
-});
-
 // Route::get('/foo', function () {
 //     Artisan::call('storage:link');
 // });
@@ -81,6 +77,7 @@ Route::get('/', [
     App\Http\Controllers\BiometrieController::class,
     'BiometrieIndex',
 ])->name('biometrie.index');
+
 Route::get('/employeur/info/ajax', [
     App\Http\Controllers\BiometrieController::class,
     'EmployeurInfoAjax',
@@ -90,6 +87,7 @@ Route::get('/send/otp/ajax', [
     App\Http\Controllers\BiometrieController::class,
     'SendOtpAjax',
 ])->name('send.otp.ajax');
+
 Route::get('/verif/otp/ajax', [
     App\Http\Controllers\BiometrieController::class,
     'VerifOtpAjax',
