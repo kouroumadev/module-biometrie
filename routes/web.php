@@ -78,3 +78,8 @@ Route::get('/verif/otp/ajax', [
     App\Http\Controllers\BiometrieController::class,
     'VerifOtpAjax',
 ])->name('verif.otp.ajax');
+
+Route::get('/send/demande', [
+    App\Http\Controllers\BiometrieController::class,
+    'SendDemande',
+])->name('send.demande');
