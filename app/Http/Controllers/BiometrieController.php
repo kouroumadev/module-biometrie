@@ -88,4 +88,14 @@ class BiometrieController extends Controller
         // dd($data);
         return view('biometrie.back', compact('data'));
     }
+    public function backDetails(int $id)
+    {
+        // dd($id);
+        $data = DB::connection('metier')
+            ->table('employeur')
+            ->where('id', $id)
+            ->get();
+        // dd($data);
+        return view('biometrie.details', compact('data'));
+    }
 }

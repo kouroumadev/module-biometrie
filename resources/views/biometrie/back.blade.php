@@ -93,6 +93,13 @@
                                         <td class="font-weight-bold">{{ $d->no_employeur }}</td>
                                         <td>{{ $d->raison_sociale }}</td>
                                         <td>
+                                            <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
+                                                {{-- <span class="badge"> --}}
+                                                    Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
+                                                    </span> --}}
+                                                {{-- </span> --}}
+                                            </a>
                                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-procla-{{ $d->id }}" type="button">
                                                 {{-- <span class="badge"> --}}
                                                     Traitement
@@ -121,34 +128,49 @@
                                                             <div class="col-md-12 bg-success p-1">
                                                                 <h5 class="text-center text-white">Détails sur l'employeur</h5>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <span class="font-weight-bold">EMPLOYEUR:</span>
-                                                                <span class="float-right text-uppercase">{{ $d->raison_sociale }}</span> <br>
 
-                                                                <span class="font-weight-bold">EMAIL:</span>
-                                                                <span class="float-right">{{ $d->email }}</span> <br>
-
-                                                                <span class="font-weight-bold">TELEPHONE:</span>
-                                                                <span class="float-right">{{ $d->telephone }}</span> <br>
-
-                                                                <span class="font-weight-bold">DEBUT ACTIVITE:</span>
-                                                                <span class="float-right">{{ $d->debut_activite }}</span> <br>
-
-
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="font-weight-bold">DATE CREATION:</span>
-                                                                <span class="float-right">{{ $d->date_creation }}</span> <br>
-
-                                                                <span class="font-weight-bold">CATEGORIE:</span>
-                                                                <span class="float-right">{{ $d->categorie }}</span> <br>
-
-                                                                <span class="font-weight-bold">ADRESSE:</span>
-                                                                <span class="float-right">{{ $d->adresse }}</span> <br>
-
-
-                                                            </div>
                                                        </div>
+                                                       <div class="profile-info">
+                                                        <div class="row">
+                                                            <ul class="col-md-8">
+                                                                <li>
+                                                                    <span>Raison Socile:</span> {{ $d->raison_sociale }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>N° Employeur:</span> {{ $d->no_employeur }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Adresse Mail:</span> {{ $d->email }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Téléphone:</span> {{ $d->telephone }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Adresse:</span> {{ $d->adresse }}
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="col-md-4">
+                                                                <li>
+                                                                    <span>Catégorie:</span> {{ $d->categorie }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Date Création:</span> {{ $d->date_creation }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Début d'activité:</span> {{ $d->debut_activite }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>N° Agrement:</span> {{ $d->no_agrement }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>N° Compte:</span> {{ $d->no_compte }}
+                                                                </li>
+
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
 
 
 
@@ -158,14 +180,20 @@
                                                                 <div class="col-md-12 bg-success p-1">
                                                                     <h5 class="text-center text-white">Feedback après traitement du dossier</h5>
                                                                 </div>
-                                                                <div class="form-group row mt-2 text-left">
-                                                                    <label class="col-sm-12 col-md-2 col-form-label">Date</label>
-                                                                    <div class="col-sm-12 col-md-10">
-                                                                        <input class="form-control" placeholder="Select Date" type="date">
+                                                                <div class="col-md-12 form-group mt-2">
+                                                                    <label class="weight-600">Éligibilité du dossier</label>
+                                                                    <div class="custom-control custom-radio mb-5">
+                                                                        <input type="radio" value="oui" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="customRadio1">OUI Ce dossier est éligible pour la biometrie</label>
                                                                     </div>
+                                                                    <div class="custom-control custom-radio mb-5">
+                                                                        <input type="radio" value="non" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="customRadio2">NON Ce dossier est éligible pour la biometrie</label>
+                                                                    </div>
+
                                                                 </div>
-                                                                <div class="col-md-12">
-                                                                    <label class="weight-600 text-danger">(Ce champs est obligatoire !)</label>
+                                                                <div id="detailsDiv" class="col-md-12" style="display: none;">
+                                                                    <label class="weight-600 text-danger">Détails sur la raison de la non Éligibilité de ce dossier (champs obligatoire !!)</label>
                                                                     <div class="form-group">
                                                                         <textarea required name="details" class="form-control"></textarea>
                                                                         <input type="hidden" name="reclamation_id" value="{{ $d->id }}">
@@ -243,6 +271,19 @@
         $("#submitBtnRecDone").click(function(){
             console.log('hheeelooo');
             $("#recDoneFrm").submit(); // Submit the form
+        });
+
+        $('input[type="radio"]').click(function(){
+            var inputValue = $(this).attr("value");
+            if(inputValue == 'oui'){
+                $("#detailsDiv").hide();
+            } else {
+                $("#detailsDiv").show();
+            }
+            // console.log(inputValue);
+            // var targetBox = $("." + inputValue);
+            // $(".content-box").not(targetBox).hide(); // Hide all content boxes except the target
+            // $(targetBox).show(); // Show the target content box
         });
     });
 </script>
