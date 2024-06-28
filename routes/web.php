@@ -48,7 +48,7 @@ Route::get('/logout', [App\Http\Controllers\AuthenController::class, 'logout'])
 ////ROUTES BACK OFFICE
 
 Route::get('/back', [App\Http\Controllers\BiometrieController::class, 'back'])
-    ->name('biometrie.back')
+    ->name('back')
     ->middleware('authCheck');
 
 ////// BIOMETRIE ROUTES ////////

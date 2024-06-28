@@ -22,7 +22,7 @@
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('reclamation.back') }}">Accueil</a></li>
+                                            href="{{ route('back') }}">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Biométrie</li>
                                 </ol>
                             </nav>
@@ -152,7 +152,7 @@
 
 
 
-                                                       <form action="{{ route('reclamation.home.done') }}" method="post" id="bioDoneFrm">
+                                                       <form action="#" method="post" id="bioDoneFrm">
                                                         @csrf
                                                         <div class="row m-2 ">
                                                                 <div class="col-md-12 bg-success p-1">
@@ -177,7 +177,7 @@
                                                     <div class="modal-footer">
                                                         <button type="submit" id="" class="btn btn-warning">Cloturer le dossier</button>
                                                         {{-- <a href="{{ route('reclamation.home.done',$rec->id ) }}" class="btn btn-warning">Cloturer le dossier <i class="fa fa-print" aria-hidden="true"></i></a> --}}
-                                                        <a href="{{ route('reclamation.home.pdf',$d->id ) }}" class="btn btn-success">Voir la fiche de reclamation <i class="fa fa-print" aria-hidden="true"></i></a>
+                                                        <a href="#" class="btn btn-success">Voir la fiche de reclamation <i class="fa fa-print" aria-hidden="true"></i></a>
                                                     </div>
                                                 </form>
                                                 </div>
