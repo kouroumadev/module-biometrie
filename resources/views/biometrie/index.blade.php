@@ -66,26 +66,26 @@
             font-weight: 600;
             text-align: center;
             border-radius: 100%;
-            background-color: rgb(96, 198, 96);
+            background-color: #f5f5f5;
             margin: 0 auto 10px auto;
-            color: #f5f5f5;
+            color: #28a745;
         }
 
         .custom-progress-bar li::after {
             content: " ";
             width: 100%;
             height: 6px;
-            background: rgb(96, 198, 96);
+            /* background: rgb(96, 198, 96); */
             position: absolute;
             left: -50%;
             top: 17px;
             z-index: 1;
         }
 
-        .custom-progress-bar li.active::after,
+        /* .custom-progress-bar li.active::after, */
         .custom-progress-bar li.active::before {
-            background: linear-gradient(to right, rgb(96, 115, 198) 20%, rgb(96, 115, 198) 40%,
-                    rgb(96, 115, 198) 60%, rgb(96, 115, 198) 80%);
+            background: linear-gradient(to right, #28a745 20%, #28a745 40%,
+                    #28a745 60%, #28a745 80%);
             background-size: 200% auto;
             animation: effect 1s linear infinite;
             color: #f5f5f5;
