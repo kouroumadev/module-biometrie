@@ -22,7 +22,8 @@ class SendDemande extends Mailable
      */
     public function __construct($no_dossier, $raison_sociale)
     {
-        //
+        $this->no_dossier = $no_dossier;
+        $this->raison_sociale = $raison_sociale;
     }
 
     /**
