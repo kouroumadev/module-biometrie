@@ -63,7 +63,7 @@
                         <a class="nav-link text-success text-uppercase font-weight-bold" data-toggle="tab" href="#profile5" role="tab" aria-selected="false">Dossiers validé(s): {{ count($dataValide) }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger text-uppercase font-weight-bold" data-toggle="tab" href="#profile15" role="tab" aria-selected="false">Dossiers réjété(s): 55</a>
+                        <a class="nav-link text-danger text-uppercase font-weight-bold" data-toggle="tab" href="#profile15" role="tab" aria-selected="false">Dossiers réjété(s): {{ count($dataRejected) }}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -289,7 +289,7 @@
                         <div class="pd-20">
                             <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
                                 <div class="pd-20">
-                                    <h4 class="text-blue h4">Liste des demandes traités</h4>
+                                    <h4 class="text-blue h4">Liste des demandes rejetés</h4>
                                 </div>
                                 <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
                                     role="grid" aria-describedby="DataTables_Table_0_info">
@@ -311,7 +311,28 @@
                                     </thead>
                                     <tbody>
 
+                                            @foreach ($dataRejected as $d)
 
+                                            <tr>
+                                                @php
+                                                $emp = DB::table('employeur')->where('no_employeur', $d->biometrie->no_employeur)->get();
+                                                @endphp
+
+                                                <td class="font-weight-bold text-center">{{ $d->biometrie->no_employeur }}</td>
+                                                <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
+                                                        {{-- <span class="badge"> --}}
+                                                            Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
+                                                            </span> --}}
+                                                        {{-- </span> --}}
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>

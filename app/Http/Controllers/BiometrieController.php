@@ -163,11 +163,15 @@ class BiometrieController extends Controller
         //     ->get();
 
         // dd($data);
-        $dataNonValide = Biometrie::all();
-        $dataValide = BioDone::all();
+        $dataNonValide = Biometrie::where('statut', '0')->get();
+        $dataValide = BioDone::where('state', 'yes')->get();
+        $dataRejected = BioDone::where('state', 'no')->get();
         // dd($data);
 
-        return view('biometrie.back', compact('dataNonValide', 'dataValide'));
+        return view(
+            'biometrie.back',
+            compact('dataNonValide', 'dataValide', 'dataRejected')
+        );
     }
 
     public function backDetails(int $id)
@@ -180,13 +184,22 @@ class BiometrieController extends Controller
         // dd($data);
 
         $data = BioDone::find($id);
-        return view('biometrie.details', compact('data'));
+        $sms =
+            $data->state == 'yes'
+                ? 'Dossier éligible pour la biométrisation'
+                : 'Dossier Rejeté par la Dirga';
+
+        return view('biometrie.details', compact('data', 'sms'));
     }
     public function backStore(Request $request)
     {
         // dd($request->all());
         $mystate = explode('/', $request->customRadio);
-        // dd($mystate);
+
+        $biometrie = Biometrie::find($request->biometrie_id);
+        $biometrie->statut = '1';
+        $biometrie->save();
+        // dd($mystate[0]);
         if ($mystate[0] == 'oui') {
             $state = 'yes';
             $sms = 'Dossier Validé avec succès';

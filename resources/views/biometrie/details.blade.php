@@ -68,13 +68,13 @@
                                 <div class="row">
                                     <ul class="col-md-6">
                                         @php
-                                        $emp = DB::table('employeur')->where('no_employeur', $data->no_employeur)->get();
+                                        $emp = DB::table('employeur')->where('no_employeur', $data->biometrie->no_employeur)->get();
                                         @endphp
                                         <li>
                                             <span>Raison Sociale:</span> {{ $emp[0]->raison_sociale }}
                                         </li>
                                         <li>
-                                            <span>N° Employeur:</span> {{ $data->no_employeur }}
+                                            <span>N° Employeur:</span> {{ $data->biometrie->no_employeur }}
                                         </li>
                                         <li>
                                             <span>Adresse Mail:</span> {{ $data->biometrie->email }}
@@ -126,7 +126,7 @@
                                             <span>N° Dossier:</span> {{ $data->biometrie->no_dossier }}
                                         </li>
                                         <li>
-                                            <span>Etat Dossier:</span> {{ $data->biometrie->email }}
+                                            <span>Etat Dossier:</span> <span class="shining-text">{{ $sms }}</span>
                                         </li>
 
                                     </ul>
