@@ -278,7 +278,8 @@
                                                 <div class="form-group">
                                                     <label>Fichier à télécharger </label>
                                                     <input type="file" name="fichier" id="fichier"
-                                                        class="form-control-file form-control height-auto">
+                                                        class="form-control-file form-control height-auto"
+                                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                                                 </div>
                                             </div>
                                         </div>

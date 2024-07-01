@@ -11,8 +11,8 @@
     </p>
     <h3>Bonjour Mme/Mr,
 
-        <p>Le numero de votre code de confirmation est: <span
-                style="font-weight: bold; color: red;">{{ $otp }}</span></p>
+        <p>Votre demande d'enrollement a bien été reçu, pour l'entreprise <strong> {{ $raison_sociale }}</strong></p>
+        <p>Vous notre éauipe vous contactera par e-mail ou téléphone pour un rendez-vous merci</p>
 
         <p>Si vous souhaitez faire une reclamation, veuillez <a
                 href="https://www.reclamations.cnssgn.com/reclamation/create">Cliquez ici</a></p>

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendDemande;
 use App\Mail\SendEmployeur;
+use App\Models\Biometrie;
 use App\Models\Otp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BiometrieController extends Controller
 {
@@ -111,6 +114,7 @@ class BiometrieController extends Controller
 
     public function SendDemande(Request $request)
     {
+        //dd($request->all());
         $no_dossier = uniqid();
         $file = $request->file('fichier')->getClientOriginalName();
         $filename = pathinfo($file, PATHINFO_FILENAME);
@@ -119,7 +123,24 @@ class BiometrieController extends Controller
         $img = $no_dossier.'.'.$extension;
         Storage::disk('bioDoc')->put($img, file_get_contents($request->file('fichier')));
 
-        dd('done');
+        $email = $request->email;
+        $raison_sociale = $request->raison_sociale_bio;
+
+        $biometrie = new Biometrie();
+        $biometrie->no_employeur = $request->no_employeur;
+        $biometrie->no_dossier = $no_dossier;
+        $biometrie->email = $email;
+        $biometrie->telephone = $request->telephone;
+        $biometrie->adresse = $request->adresse;
+        $biometrie->nombre_employe = $request->nombre_employe;
+        $biometrie->fichier = $img;
+        $biometrie->save();
+
+        Mail::to($email)->send(new SendDemande($no_dossier, $raison_sociale));
+
+        Alert::success('Votre démande à bien été reçu !', 'Un e-mail de confirmation à été envoyé.');
+
+        return redirect()->route('biometrie.index');
 
     }
     ///BACKEND
