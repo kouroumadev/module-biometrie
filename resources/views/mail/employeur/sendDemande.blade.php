@@ -7,12 +7,12 @@
 
 <body>
     <p>
-        <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: 800" height="120">
+        <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: 1000" height="120">
     </p>
     <h3>Bonjour Mme/Mr,
 
         <p>Votre demande d'enrollement a bien été reçu, pour l'entreprise <strong> {{ $raison_sociale }}</strong></p>
-        <p>Vous notre éauipe vous contactera par e-mail ou téléphone pour un rendez-vous merci</p>
+        <p> Notre équipe vous contactera par e-mail ou téléphone pour un rendez-vous merci</p>
 
         <p>Si vous souhaitez faire une reclamation, veuillez <a
                 href="https://www.reclamations.cnssgn.com/reclamation/create">Cliquez ici</a></p>

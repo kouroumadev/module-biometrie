@@ -6,13 +6,13 @@
 </head>
 
 <body>
-    <p>
-        <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: 800" height="120">
-    </p>
+    <div style="width: 500px; height:200px">
+        <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: inherit"
+            height="inherit">
+    </div>
     <h3>Bonjour Mme/Mr,
 
-        <p>Le numero de votre code de confirmation est: <span
-                style="font-weight: bold; color: red;">{{ $otp }}</span></p>
+        <p>Votre OTP est: <span style="font-weight: bold; color: red;">{{ $otp }}</span></p>
 
         <p>Si vous souhaitez faire une reclamation, veuillez <a
                 href="https://www.reclamations.cnssgn.com/reclamation/create">Cliquez ici</a></p>
