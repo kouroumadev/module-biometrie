@@ -123,13 +123,12 @@ class BiometrieController extends Controller
         $filename = pathinfo($file, PATHINFO_FILENAME);
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-        $img = $no_dossier . '.' . $extension;
+        $img = $no_dossier.'.'.$extension;
         Storage::disk('bioDoc')->put(
             $img,
             file_get_contents($request->file('fichier'))
         );
 
-<<<<<<< HEAD
         $email = $request->email;
         $raison_sociale = $request->raison_sociale_bio;
 
@@ -149,9 +148,6 @@ class BiometrieController extends Controller
 
         return redirect()->route('biometrie.index');
 
-=======
-        dd('done');
->>>>>>> 3981ad5c4dd274e0229761346263fcb0f9d0dc78
     }
     ///BACKEND
 
@@ -173,6 +169,7 @@ class BiometrieController extends Controller
             ->table('employeur')
             ->where('id', $id)
             ->get();
+
         // dd($data);
         return view('biometrie.details', compact('data'));
     }
