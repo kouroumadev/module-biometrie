@@ -26,8 +26,8 @@ class BiometrieController extends Controller
         if ($num == '') {
             return response()->json('null', 200);
         } else {
-            $data = DB::connection('metier')
-                ->table('employeur')
+            $data = DB::table('employeur')
+                // ->table('employeur')
                 ->where('no_employeur', $num)
                 ->get(); //8204000010400
             if (count($data) == 0) {
@@ -144,18 +144,20 @@ class BiometrieController extends Controller
 
         Mail::to($email)->send(new SendDemande($no_dossier, $raison_sociale));
 
-        Alert::success('Votre démande à bien été reçu !', 'Un e-mail de confirmation à été envoyé.');
+        Alert::success(
+            'Votre démande à bien été reçu !',
+            'Un e-mail de confirmation à été envoyé.'
+        );
 
         return redirect()->route('biometrie.index');
-
     }
     ///BACKEND
 
     public function back()
     {
-        $data = DB::connection('metier')
-            ->table('employeur')
-            ->where('no_employeur', '6104000050400')
+        $data = DB::table('employeur')
+            // ->table('employeur')
+            ->where('no_employeur', '6104000050400') //8204000010400 2504000020400 6104000030400
             ->get();
 
         // dd($data);
@@ -165,8 +167,8 @@ class BiometrieController extends Controller
     public function backDetails(int $id)
     {
         // dd($id);
-        $data = DB::connection('metier')
-            ->table('employeur')
+        $data = DB::table('metiemployeurer')
+            // ->table('employeur')
             ->where('id', $id)
             ->get();
 
