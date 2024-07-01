@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('biometrie_id')->constrained('biometries');
             $table->foreignId('user_id')->constrained('users');
             $table->text('details')->nullable();
-            $table->string('state')->default('1');
+            $table->string('state');
             $table->timestamps();
         });
     }

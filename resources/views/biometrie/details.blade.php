@@ -67,43 +67,46 @@
                             <div class="profile-info">
                                 <div class="row">
                                     <ul class="col-md-6">
+                                        @php
+                                        $emp = DB::table('employeur')->where('no_employeur', $data->no_employeur)->get();
+                                        @endphp
                                         <li>
-                                            <span>Raison Sociale:</span> {{ $data[0]->raison_sociale }}
+                                            <span>Raison Sociale:</span> {{ $emp[0]->raison_sociale }}
                                         </li>
                                         <li>
-                                            <span>N° Employeur:</span> {{ $data[0]->no_employeur }}
+                                            <span>N° Employeur:</span> {{ $data->no_employeur }}
                                         </li>
                                         <li>
-                                            <span>Adresse Mail:</span> {{ $data[0]->email }}
+                                            <span>Adresse Mail:</span> {{ $data->biometrie->email }}
                                         </li>
                                         <li>
-                                            <span>Nombre D'employés:</span> {{ $data[0]->effectif_total }}
+                                            <span>Nombre D'employés:</span> {{ $data->biometrie->nombre_employe }}
                                         </li>
                                         <li>
-                                            <span>Téléphone:</span> {{ $data[0]->telephone }}
+                                            <span>Téléphone:</span> {{ $data->biometrie->telephone }}
                                         </li>
                                         <li>
-                                            <span>Adresse:</span> {{ $data[0]->adresse }}
+                                            <span>Adresse:</span> {{ $data->biometrie->adresse }}
                                         </li>
                                     </ul>
                                     <ul class="col-md-6">
                                         <li>
-                                            <span>Catégorie:</span> {{ $data[0]->categorie }}
+                                            <span>Catégorie:</span> {{ $emp[0]->categorie }}
                                         </li>
                                         <li>
-                                            <span>Date Création:</span> {{ $data[0]->date_creation }}
+                                            <span>Date Création:</span> {{ $emp[0]->date_creation }}
                                         </li>
                                         <li>
-                                            <span>Date Immatriculation:</span> {{ $data[0]->date_imm }}
+                                            <span>Date Immatriculation:</span> {{ $emp[0]->date_imm }}
                                         </li>
                                         <li>
-                                            <span>Début d'activité:</span> {{ $data[0]->debut_activite }}
+                                            <span>Début d'activité:</span> {{ $emp[0]->debut_activite }}
                                         </li>
                                         <li>
-                                            <span>N° Agrement:</span> {{ $data[0]->no_agrement }}
+                                            <span>N° Agrement:</span> {{ $emp[0]->no_agrement }}
                                         </li>
                                         <li>
-                                            <span>N° Compte:</span> {{ $data[0]->no_compte }}
+                                            <span>N° Compte:</span> {{ $emp[0]->no_compte }}
                                         </li>
 
                                     </ul>
@@ -120,19 +123,19 @@
                                 <div class="row">
                                     <ul class="col-md-6">
                                         <li>
-                                            <span>N° Dossier:</span> 776656567
+                                            <span>N° Dossier:</span> {{ $data->biometrie->no_dossier }}
                                         </li>
                                         <li>
-                                            <span>Etat Dossier:</span> recu lorem
+                                            <span>Etat Dossier:</span> {{ $data->biometrie->email }}
                                         </li>
 
                                     </ul>
                                     <ul class="col-md-6">
                                         <li>
-                                            <span>Date de reception du dossier:</span> 7667675675
+                                            <span>Date de reception du dossier:</span> {{ $data->biometrie->created_at }}
                                         </li>
                                         <li>
-                                            <span>Date de validation d'éligibilité(DIRGA):</span> 9798786675
+                                            <span>Date de validation d'éligibilité(DIRGA):</span> {{ $data->created_at }}
                                         </li>
 
 

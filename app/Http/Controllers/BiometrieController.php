@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendDemande;
 use App\Mail\SendEmployeur;
+use App\Models\BioDone;
 use App\Models\Biometrie;
 use App\Models\Otp;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -155,23 +157,52 @@ class BiometrieController extends Controller
 
     public function back()
     {
-        $data = DB::table('employeur')
-            // ->table('employeur')
-            ->where('no_employeur', '6104000050400') #8204000010400 2504000020400 6104000030400
-            ->get();
+        // $data = DB::table('employeur')
+        //     // ->table('employeur')
+        //     ->where('no_employeur', '6104000050400') #8204000010400 2504000020400 6104000030400
+        //     ->get();
 
         // dd($data);
-        return view('biometrie.back', compact('data'));
+        $dataNonValide = Biometrie::all();
+        $dataValide = BioDone::all();
+        // dd($data);
+
+        return view('biometrie.back', compact('dataNonValide', 'dataValide'));
     }
 
     public function backDetails(int $id)
     {
         // dd($id);
-        $data = DB::table('metiemployeurer')
-            // ->table('employeur')
-            ->where('id', $id)
-            ->get();
+        // $data = DB::table('metiemployeurer')
+        //     // ->table('employeur')
+        //     ->where('id', $id)
+        //     ->get();
         // dd($data);
+
+        $data = BioDone::find($id);
         return view('biometrie.details', compact('data'));
+    }
+    public function backStore(Request $request)
+    {
+        // dd($request->all());
+        $mystate = explode('/', $request->customRadio);
+        // dd($mystate);
+        if ($mystate[0] == 'oui') {
+            $state = 'yes';
+            $sms = 'Dossier Validé avec succès';
+        } else {
+            $state = 'no';
+            $sms = 'Dossier rejeté avec succès';
+        }
+
+        $bio = new BioDone();
+        $bio->biometrie_id = $request->biometrie_id;
+        $bio->user_id = session('loginId');
+        $bio->details = $request->details;
+        $bio->state = $state;
+        $bio->save();
+
+        Alert::success('ELIGIBILITE', $sms);
+        return redirect(route('back'));
     }
 }

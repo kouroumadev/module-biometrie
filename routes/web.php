@@ -51,6 +51,13 @@ Route::get('/back', [App\Http\Controllers\BiometrieController::class, 'back'])
     ->name('back')
     ->middleware('authCheck');
 
+Route::post('/back/store', [
+    App\Http\Controllers\BiometrieController::class,
+    'backStore',
+])
+    ->name('back.store')
+    ->middleware('authCheck');
+
 Route::get('/back/details/{id}', [
     App\Http\Controllers\BiometrieController::class,
     'backDetails',

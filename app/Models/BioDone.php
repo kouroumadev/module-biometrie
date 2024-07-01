@@ -9,4 +9,9 @@ class BioDone extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function biometrie()
+    {
+        return $this->belongsTo(Biometrie::class, 'biometrie_id');
+    }
 }

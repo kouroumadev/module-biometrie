@@ -57,16 +57,17 @@
             <div class="tab">
                 <ul class="nav nav-tabs customtab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active text-warning text-uppercase font-weight-bold" data-toggle="tab" href="#home5" role="tab" aria-selected="true">Dossiers en attente de validation: 12</a>
+                        <a class="nav-link active text-warning text-uppercase font-weight-bold" data-toggle="tab" href="#home5" role="tab" aria-selected="true">Dossiers en attente de validation: {{ count($dataNonValide) }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-success text-uppercase font-weight-bold" data-toggle="tab" href="#profile5" role="tab" aria-selected="false">Dossiers validé(s): 55</a>
+                        <a class="nav-link text-success text-uppercase font-weight-bold" data-toggle="tab" href="#profile5" role="tab" aria-selected="false">Dossiers validé(s): {{ count($dataValide) }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger text-uppercase font-weight-bold" data-toggle="tab" href="#profile15" role="tab" aria-selected="false">Dossiers réjété(s): 55</a>
                     </li>
                 </ul>
                 <div class="tab-content">
+
                     <div class="tab-pane fade show active" id="home5" role="tabpanel">
                         <div class="pd-20">
                             <div class="pb-20 shadow-lg p-3 mb-5 bg-white rounded">
@@ -92,9 +93,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $d)
+                                        @foreach ($dataNonValide as $d)
+                                        <tr>
+                                            @php
+                                            $emp = DB::table('employeur')->where('no_employeur',$d->no_employeur)->get();
+                                            @endphp
                                         <td class="font-weight-bold text-center">{{ $d->no_employeur }}</td>
-                                        <td class="text-center">{{ $d->raison_sociale }}</td>
+                                        <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
                                         <td class="text-center">
 
                                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-procla-{{ $d->id }}" type="button">
@@ -109,7 +114,7 @@
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title text-center" id="myLargeModalLabel">Dossier N° 7876767778 | Reçu le 01/05/2024</h4>
+                                                        <h4 class="modal-title text-center" id="myLargeModalLabel">Dossier N° {{ $d->no_dossier }} | Reçu le {{ $d->created_at }}</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     </div>
                                                     <div class="modal-body">
@@ -134,7 +139,7 @@
                                                             </div>
                                                             <ul class="col-md-8">
                                                                 <li>
-                                                                    <span>Raison Sociale:</span> {{ $d->raison_sociale }}
+                                                                    <span>Raison Sociale:</span> {{ $emp[0]->raison_sociale }}
                                                                 </li>
                                                                 <li>
                                                                     <span>N° Employeur:</span> {{ $d->no_employeur }}
@@ -143,7 +148,7 @@
                                                                     <span>Adresse Mail:</span> {{ $d->email }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>Nombre D'employés:</span> {{ $d->effectif_total }}
+                                                                    <span>Nombre D'employés:</span> {{ $d->nombre_employe }}
                                                                 </li>
                                                                 <li>
                                                                     <span>Téléphone:</span> {{ $d->telephone }}
@@ -154,22 +159,22 @@
                                                             </ul>
                                                             <ul class="col-md-4">
                                                                 <li>
-                                                                    <span>Catégorie:</span> {{ $d->categorie }}
+                                                                    <span>Catégorie:</span> {{ $emp[0]->categorie }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>Date Création:</span> {{ $d->date_creation }}
+                                                                    <span>Date Création:</span> {{ $emp[0]->date_creation }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>Date Immatriculation:</span> {{ $d->date_imm }}
+                                                                    <span>Date Immatriculation:</span> {{ $emp[0]->date_imm }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>Début d'activité:</span> {{ $d->debut_activite }}
+                                                                    <span>Début d'activité:</span> {{ $emp[0]->debut_activite }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>N° Agrement:</span> {{ $d->no_agrement }}
+                                                                    <span>N° Agrement:</span> {{ $emp[0]->no_agrement }}
                                                                 </li>
                                                                 <li>
-                                                                    <span>N° Compte:</span> {{ $d->no_compte }}
+                                                                    <span>N° Compte:</span> {{ $emp[0]->no_compte }}
                                                                 </li>
 
                                                             </ul>
@@ -180,28 +185,29 @@
 
 
 
-                                                       <form action="#" method="post" id="bioDoneFrm">
+                                                       <form action="{{ route('back.store') }}" method="post" id="bioDoneFrm">
                                                         @csrf
                                                         <div class="row m-2 ">
                                                                 <div class="col-md-12 bg-success p-1">
                                                                     <h5 class="text-center text-white">Éligibilité du Dossier (DQE)</h5>
+                                                                    <input type="hidden" name="biometrie_id" value="{{ $d->id }}">
                                                                 </div>
                                                                 <div class="col-md-12 form-group mt-2">
                                                                     {{-- <label class="weight-600">Éligibilité du dossier</label> --}}
                                                                     <div class="custom-control custom-radio mb-5">
-                                                                        <input type="radio" checked value="oui" id="customRadio1" name="customRadio" class="custom-control-input">
-                                                                        <label class="custom-control-label" for="customRadio1">OUI Ce dossier est éligible pour la biometrie</label>
+                                                                        <input type="radio" checked value="oui/{{ $d->id }}" id="customRadio1{{ $d->id }}" name="customRadio" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="customRadio1{{ $d->id }}">OUI Ce dossier est éligible pour la biometrie</label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio mb-5">
-                                                                        <input type="radio" value="non" id="customRadio2" name="customRadio" class="custom-control-input">
-                                                                        <label class="custom-control-label" for="customRadio2">NON Ce dossier n'est pas éligible pour la biometrie</label>
+                                                                        <input type="radio" value="non/{{ $d->id }}" id="customRadio2{{ $d->id }}" name="customRadio" class="custom-control-input">
+                                                                        <label class="custom-control-label" for="customRadio2{{ $d->id }}">NON Ce dossier n'est pas éligible pour la biometrie</label>
                                                                     </div>
 
                                                                 </div>
-                                                                <div id="detailsDiv" class="col-md-12" style="display: none;">
+                                                                <div id="detailsDiv{{ $d->id }}" class="col-md-12" style="display: none;">
                                                                     <label class="weight-600 text-danger">Détails sur la raison de la non Éligibilité de ce dossier (champs obligatoire !!)</label>
                                                                     <div class="form-group">
-                                                                        <textarea required name="details" class="form-control"></textarea>
+                                                                        <textarea id="details" name="details" class="form-control"></textarea>
                                                                         <input type="hidden" name="reclamation_id" value="{{ $d->id }}">
                                                                     </div>
                                                                 </div>
@@ -217,6 +223,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </tr>
 
                                         @endforeach
                                     </tbody>
@@ -250,19 +257,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $d)
-                                        <td class="font-weight-bold text-center">{{ $d->no_employeur }}</td>
-                                        <td class="text-center">{{ $d->raison_sociale }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
-                                                {{-- <span class="badge"> --}}
-                                                    Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
-                                                    </span> --}}
-                                                {{-- </span> --}}
-                                            </a>
+                                        @foreach ($dataValide as $d)
+                                        <tr>
+                                            @php
+                                            $emp = DB::table('employeur')->where('no_employeur', $d->biometrie->no_employeur)->get();
+                                            @endphp
 
-                                        </td>
+                                            <td class="font-weight-bold text-center">{{ $d->biometrie->no_employeur }}</td>
+                                            <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
+                                                    {{-- <span class="badge"> --}}
+                                                        Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        {{-- <span class="spinner-grow text-danger spinner-grow-sm" role="status" aria-hidden="true">
+                                                        </span> --}}
+                                                    {{-- </span> --}}
+                                                </a>
+
+                                            </td>
+                                        </tr>
 
 
                                         @endforeach
@@ -321,18 +334,27 @@
 
 <script>
     $(document).ready(function(){
-        $("#submitBtnRecDone").click(function(){
-            console.log('hheeelooo');
-            $("#recDoneFrm").submit(); // Submit the form
+
+        $("#validation_btn").click(function(){
+            $("#bioDoneFrm").submit();
+            // console.log(is_required);
+            // if(is_required == "oui" || (is_required == "non" && $("#details").val() != "")){
+            //     $("#bioDoneFrm").submit(); // Submit the form
+            // } else {
+            //     console.log("no wayyyyyyy");
+            // }
+
         });
 
         $('input[type="radio"]').click(function(){
             var inputValue = $(this).attr("value");
-            if(inputValue == 'oui'){
-                $("#detailsDiv").hide();
+            var val = inputValue.split("/");
+            console.log(val);
+            if(val[0] == 'oui'){
+                $("#detailsDiv"+val[1]).hide();
                 $("#validation_btn").text("Valider le dossier");
             } else {
-                $("#detailsDiv").show();
+                $("#detailsDiv"+val[1]).show();
                 $("#validation_btn").text("Rejeter le dossier");
 
             }
