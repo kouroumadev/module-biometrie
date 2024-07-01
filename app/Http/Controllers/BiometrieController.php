@@ -129,7 +129,6 @@ class BiometrieController extends Controller
             file_get_contents($request->file('fichier'))
         );
 
-<<<<<<< HEAD
         $email = $request->email;
         $raison_sociale = $request->raison_sociale_bio;
 
@@ -145,20 +144,19 @@ class BiometrieController extends Controller
 
         Mail::to($email)->send(new SendDemande($no_dossier, $raison_sociale));
 
-        Alert::success('Votre démande à bien été reçu !', 'Un e-mail de confirmation à été envoyé.');
+        Alert::success(
+            'Votre démande à bien été reçu !',
+            'Un e-mail de confirmation à été envoyé.'
+        );
 
         return redirect()->route('biometrie.index');
-
-=======
-        dd('done');
->>>>>>> 3981ad5c4dd274e0229761346263fcb0f9d0dc78
     }
     ///BACKEND
 
     public function back()
     {
-        $data = DB::connection('metier')
-            ->table('employeur')
+        $data = DB::table('employeur')
+            // ->table('employeur')
             ->where('no_employeur', '6104000050400')
             ->get();
 
@@ -169,8 +167,8 @@ class BiometrieController extends Controller
     public function backDetails(int $id)
     {
         // dd($id);
-        $data = DB::connection('metier')
-            ->table('employeur')
+        $data = DB::table('metiemployeurer')
+            // ->table('employeur')
             ->where('id', $id)
             ->get();
         // dd($data);
