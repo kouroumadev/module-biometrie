@@ -26,8 +26,8 @@ class BiometrieController extends Controller
         if ($num == '') {
             return response()->json('null', 200);
         } else {
-            $data = DB::connection('metier')
-                ->table('employeur')
+            $data = DB::table('employeur')
+                // ->table('employeur')
                 ->where('no_employeur', $num)
                 ->get(); //8204000010400
             if (count($data) == 0) {
@@ -157,7 +157,7 @@ class BiometrieController extends Controller
     {
         $data = DB::table('employeur')
             // ->table('employeur')
-            ->where('no_employeur', '6104000050400')
+            ->where('no_employeur', '6104000050400') #8204000010400 2504000020400 6104000030400
             ->get();
 
         // dd($data);
