@@ -68,13 +68,16 @@
                                 <div class="row">
                                     <ul class="col-md-6">
                                         <li>
-                                            <span>Raison Socile:</span> {{ $data[0]->raison_sociale }}
+                                            <span>Raison Sociale:</span> {{ $data[0]->raison_sociale }}
                                         </li>
                                         <li>
                                             <span>N° Employeur:</span> {{ $data[0]->no_employeur }}
                                         </li>
                                         <li>
                                             <span>Adresse Mail:</span> {{ $data[0]->email }}
+                                        </li>
+                                        <li>
+                                            <span>Nombre D'employés:</span> {{ $data[0]->effectif_total }}
                                         </li>
                                         <li>
                                             <span>Téléphone:</span> {{ $data[0]->telephone }}
@@ -89,6 +92,9 @@
                                         </li>
                                         <li>
                                             <span>Date Création:</span> {{ $data[0]->date_creation }}
+                                        </li>
+                                        <li>
+                                            <span>Date Immatriculation:</span> {{ $data[0]->date_imm }}
                                         </li>
                                         <li>
                                             <span>Début d'activité:</span> {{ $data[0]->debut_activite }}
@@ -110,129 +116,31 @@
 
                     <div class="tab-pane fade" id="profile5" role="tabpanel">
                         <div class="pd-20">
-                            <form>
-                                <ul class="profile-edit-list row">
-                                    <li class="weight-500 col-md-6">
-                                        <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4>
-                                        <div class="form-group">
-                                            <label>Full Name</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input class="form-control form-control-lg" type="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date of birth</label>
-                                            <input class="form-control form-control-lg date-picker" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Gender</label>
-                                            <div class="d-flex">
-                                                <div class="custom-control custom-radio mb-5 mr-20">
-                                                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                                                    <label class="custom-control-label weight-400" for="customRadio4">Male</label>
-                                                </div>
-                                                <div class="custom-control custom-radio mb-5">
-                                                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                                    <label class="custom-control-label weight-400" for="customRadio5">Female</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            <select class="selectpicker form-control form-control-lg" data-style="btn-outline-secondary btn-lg" title="Not Chosen">
-                                                <option>United States</option>
-                                                <option>India</option>
-                                                <option>United Kingdom</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>State/Province/Region</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Postal Code</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Phone Number</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Visa Card Number</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Paypal ID</label>
-                                            <input class="form-control form-control-lg" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox mb-5">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1-1">
-                                                <label class="custom-control-label weight-400" for="customCheck1-1">I agree to receive notification emails</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <input type="submit" class="btn btn-primary" value="Update Information">
-                                        </div>
-                                    </li>
-                                    <li class="weight-500 col-md-6">
-                                        <h4 class="text-blue h5 mb-20">Edit Social Media links</h4>
-                                        <div class="form-group">
-                                            <label>Facebook URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Twitter URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Linkedin URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Instagram URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Dribbble URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Dropbox URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Google-plus URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Pinterest URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Skype URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Vine URL:</label>
-                                            <input class="form-control form-control-lg" type="text" placeholder="Paste your link here">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <input type="submit" class="btn btn-primary" value="Save & Update">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </form>
+                            <div class="profile-info">
+                                <div class="row">
+                                    <ul class="col-md-6">
+                                        <li>
+                                            <span>N° Dossier:</span> 776656567
+                                        </li>
+                                        <li>
+                                            <span>Etat Dossier:</span> recu lorem
+                                        </li>
+
+                                    </ul>
+                                    <ul class="col-md-6">
+                                        <li>
+                                            <span>Date de reception du dossier:</span> 7667675675
+                                        </li>
+                                        <li>
+                                            <span>Date de validation d'éligibilité(DIRGA):</span> 9798786675
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

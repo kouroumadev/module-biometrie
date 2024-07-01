@@ -38,7 +38,9 @@ class BiometrieController extends Controller
     public function SendOtpAjax(Request $request)
     {
         $email = $request->email;
-        $last = Otp::where('email', $email)->latest()->first();
+        $last = Otp::where('email', $email)
+            ->latest()
+            ->first();
         if ($last) {
             $otp = rand(00000, 99999);
             $update = Otp::find($last->id);
@@ -91,7 +93,9 @@ class BiometrieController extends Controller
         $otp_db = Otp::where('code', $code)->get();
         //dd(count($otp_db));
         if (count($otp_db) == 1) {
-            $delete = DB::table('otps')->where('email', $otp_db[0]->email)->delete();
+            $delete = DB::table('otps')
+                ->where('email', $otp_db[0]->email)
+                ->delete();
 
             return response()->json('success', 200);
         } else {
@@ -106,7 +110,6 @@ class BiometrieController extends Controller
         // } else {
         //     return response()->json('not exist', 200);
         // }
-
     }
 
     public function SendDemande(Request $request)
@@ -116,11 +119,13 @@ class BiometrieController extends Controller
         $filename = pathinfo($file, PATHINFO_FILENAME);
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-        $img = $no_dossier.'.'.$extension;
-        Storage::disk('bioDoc')->put($img, file_get_contents($request->file('fichier')));
+        $img = $no_dossier . '.' . $extension;
+        Storage::disk('bioDoc')->put(
+            $img,
+            file_get_contents($request->file('fichier'))
+        );
 
         dd('done');
-
     }
     ///BACKEND
 
@@ -133,5 +138,16 @@ class BiometrieController extends Controller
 
         // dd($data);
         return view('biometrie.back', compact('data'));
+    }
+
+    public function backDetails(int $id)
+    {
+        // dd($id);
+        $data = DB::connection('metier')
+            ->table('employeur')
+            ->where('id', $id)
+            ->get();
+        // dd($data);
+        return view('biometrie.details', compact('data'));
     }
 }
