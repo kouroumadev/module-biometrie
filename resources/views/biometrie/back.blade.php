@@ -78,8 +78,8 @@
                                     <thead class="bg-success">
                                         <tr>
                                             {{-- <th class="table-plus text-white">N° Dossier</th> --}}
-                                            <th class="table-plus text-white">N° Immat/Pension</th>
-                                            <th class="text-white">Prenom & Nom/Employeur</th>
+                                            <th class="table-plus text-white text-center">N° Immatriculation</th>
+                                            <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
                                             <th class="text-white">Email</th>
                                             <th class="text-white">Adresse</th>
@@ -88,14 +88,14 @@
                                             {{-- <th class="text-white">Prestation</th> --}}
                                             {{-- <th class="text-white">Motif(s)</th>
                                             <th class="text-white">Details</th> --}}
-                                            <th class="datatable-nosort text-white">Action</th>
+                                            <th class="datatable-nosort text-white text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $d)
-                                        <td class="font-weight-bold">{{ $d->no_employeur }}</td>
-                                        <td>{{ $d->raison_sociale }}</td>
-                                        <td>
+                                        <td class="font-weight-bold text-center">{{ $d->no_employeur }}</td>
+                                        <td class="text-center">{{ $d->raison_sociale }}</td>
+                                        <td class="text-center">
 
                                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-procla-{{ $d->id }}" type="button">
                                                 {{-- <span class="badge"> --}}
@@ -109,11 +109,11 @@
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title text-center" id="myLargeModalLabel">DOSSIER REÇU LE: {{ $d->commune }}</h4>
+                                                        <h4 class="modal-title text-center" id="myLargeModalLabel">Dossier N° 7876767778 | Reçu le 01/05/2024</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                       <div class="row mt-2 m-2 justify-content-center">
+                                                       {{-- <div class="row mt-2 m-2 justify-content-center">
                                                             <div class="col-md-6">
                                                                 <span class="font-weight-bold">N° DOSSIER:</span>
                                                                 <span class="float-right font-weight-bold">67676767</span> <br> <hr>
@@ -126,18 +126,24 @@
                                                                 <h5 class="text-center text-white">Détails sur l'employeur</h5>
                                                             </div>
 
-                                                       </div>
+                                                       </div> --}}
                                                        <div class="profile-info">
                                                         <div class="row">
+                                                            <div class="col-md-12 bg-success p-1">
+                                                                <h5 class="text-center text-white">Infos Employeur</h5>
+                                                            </div>
                                                             <ul class="col-md-8">
                                                                 <li>
-                                                                    <span>Raison Socile:</span> {{ $d->raison_sociale }}
+                                                                    <span>Raison Sociale:</span> {{ $d->raison_sociale }}
                                                                 </li>
                                                                 <li>
                                                                     <span>N° Employeur:</span> {{ $d->no_employeur }}
                                                                 </li>
                                                                 <li>
                                                                     <span>Adresse Mail:</span> {{ $d->email }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Nombre D'employés:</span> {{ $d->effectif_total }}
                                                                 </li>
                                                                 <li>
                                                                     <span>Téléphone:</span> {{ $d->telephone }}
@@ -152,6 +158,9 @@
                                                                 </li>
                                                                 <li>
                                                                     <span>Date Création:</span> {{ $d->date_creation }}
+                                                                </li>
+                                                                <li>
+                                                                    <span>Date Immatriculation:</span> {{ $d->date_imm }}
                                                                 </li>
                                                                 <li>
                                                                     <span>Début d'activité:</span> {{ $d->debut_activite }}
@@ -180,12 +189,12 @@
                                                                 <div class="col-md-12 form-group mt-2">
                                                                     {{-- <label class="weight-600">Éligibilité du dossier</label> --}}
                                                                     <div class="custom-control custom-radio mb-5">
-                                                                        <input type="radio" value="oui" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                                        <input type="radio" checked value="oui" id="customRadio1" name="customRadio" class="custom-control-input">
                                                                         <label class="custom-control-label" for="customRadio1">OUI Ce dossier est éligible pour la biometrie</label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio mb-5">
                                                                         <input type="radio" value="non" id="customRadio2" name="customRadio" class="custom-control-input">
-                                                                        <label class="custom-control-label" for="customRadio2">NON Ce dossier est éligible pour la biometrie</label>
+                                                                        <label class="custom-control-label" for="customRadio2">NON Ce dossier n'est pas éligible pour la biometrie</label>
                                                                     </div>
 
                                                                 </div>
@@ -200,7 +209,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" id="" class="btn btn-success">Valider</button>
+                                                        <button type="submit" id="validation_btn" class="btn btn-success">Valider le dossier</button>
                                                         {{-- <a href="{{ route('reclamation.home.done',$rec->id ) }}" class="btn btn-warning">Cloturer le dossier <i class="fa fa-print" aria-hidden="true"></i></a> --}}
                                                         {{-- <a href="#" class="btn btn-success">Voir la fiche de reclamation <i class="fa fa-print" aria-hidden="true"></i></a> --}}
                                                     </div>
@@ -227,8 +236,8 @@
                                     <thead class="bg-success">
                                         <tr>
                                             {{-- <th class="table-plus text-white">N° Dossier</th> --}}
-                                            <th class="table-plus text-white">N° Immat/Pension</th>
-                                            <th class="text-white">Prenom & Nom/Employeur</th>
+                                            <th class="table-plus text-white text-center">N° Immatriculation</th>
+                                            <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
                                             <th class="text-white">Email</th>
                                             <th class="text-white">Adresse</th>
@@ -237,14 +246,14 @@
                                             {{-- <th class="text-white">Prestation</th> --}}
                                             {{-- <th class="text-white">Motif(s)</th>
                                             <th class="text-white">Details</th> --}}
-                                            <th class="datatable-nosort text-white">Action</th>
+                                            <th class="datatable-nosort text-white text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $d)
-                                        <td class="font-weight-bold">{{ $d->no_employeur }}</td>
-                                        <td>{{ $d->raison_sociale }}</td>
-                                        <td>
+                                        <td class="font-weight-bold text-center">{{ $d->no_employeur }}</td>
+                                        <td class="text-center">{{ $d->raison_sociale }}</td>
+                                        <td class="text-center">
                                             <a href="{{ route('back.details', $d->id) }}" class="btn btn-success">
                                                 {{-- <span class="badge"> --}}
                                                     Plus de détails <i class="fa fa-eye" aria-hidden="true"></i>
@@ -273,18 +282,18 @@
                                     role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead class="bg-success">
                                         <tr>
-                                            <th class="table-plus text-white">N° Dossier</th>
-                                            <th class="table-plus text-white">N° Immat/Pension</th>
-                                            <th class="text-white">Prenom & Nom/Employeur</th>
+                                            {{-- <th class="table-plus text-white">N° Dossier</th> --}}
+                                            <th class="table-plus text-white text-center">N° Immatriculation</th>
+                                            <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
                                             <th class="text-white">Email</th>
                                             <th class="text-white">Adresse</th>
                                             <th class="text-white">Telephone</th> --}}
-                                            <th class="text-white">Type</th>
+                                            {{-- <th class="text-white">Type</th> --}}
                                             {{-- <th class="text-white">Prestation</th> --}}
                                             {{-- <th class="text-white">Motif(s)</th>
                                             <th class="text-white">Details</th> --}}
-                                            <th class="datatable-nosort text-white">Action</th>
+                                            <th class="datatable-nosort text-white text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -321,8 +330,11 @@
             var inputValue = $(this).attr("value");
             if(inputValue == 'oui'){
                 $("#detailsDiv").hide();
+                $("#validation_btn").text("Valider le dossier");
             } else {
                 $("#detailsDiv").show();
+                $("#validation_btn").text("Rejeter le dossier");
+
             }
             // console.log(inputValue);
             // var targetBox = $("." + inputValue);
