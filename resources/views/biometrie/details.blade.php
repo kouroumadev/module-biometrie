@@ -126,7 +126,12 @@
                                             <span>N° Dossier:</span> {{ $data->biometrie->no_dossier }}
                                         </li>
                                         <li>
-                                            <span>Etat Dossier:</span> <span class="shining-text">{{ $sms }}</span>
+                                            <span>Etat Dossier:</span> <span class="shining-text font-weight-bold">{{ $sms }} </span>
+                                            @if ($data->state == 'yes')
+                                            <span><i class="icon-copy fa fa-check-circle fa-3x text-success" aria-hidden="true"></i></span>
+                                            @else
+                                            <span><i class="icon-copy fa fa-close fa-3x text-danger" aria-hidden="true"></i></span>
+                                            @endif
                                         </li>
 
                                     </ul>
@@ -135,7 +140,16 @@
                                             <span>Date de reception du dossier:</span> {{ $data->biometrie->created_at }}
                                         </li>
                                         <li>
-                                            <span>Date de validation d'éligibilité(DIRGA):</span> {{ $data->created_at }}
+                                            @if ($data->state == 'yes')
+                                            <span>Date de validation d'éligibilité(par la DIRGA):</span> {{ $data->created_at }}
+                                            @else
+                                            <span>Date de validation d'inéligibilité(par la DIRGA):</span> {{ $data->created_at }}
+                                            @endif
+                                        </li>
+                                        <li>
+                                            @if ($data->state == 'no')
+                                            <span>Raison sur l'inéligibilité(par la DIRGA):</span> {{ $data->details }}
+                                            @endif
                                         </li>
 
 

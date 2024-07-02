@@ -78,7 +78,7 @@
                                     role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead class="bg-success">
                                         <tr>
-                                            {{-- <th class="table-plus text-white">N° Dossier</th> --}}
+                                            <th class="table-plus text-white">N° Dossier</th>
                                             <th class="table-plus text-white text-center">N° Immatriculation</th>
                                             <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
@@ -98,6 +98,7 @@
                                             @php
                                             $emp = DB::table('employeur')->where('no_employeur',$d->no_employeur)->get();
                                             @endphp
+                                        <td class="font-weight-bold text-center">{{ $d->no_dossier }}</td>
                                         <td class="font-weight-bold text-center">{{ $d->no_employeur }}</td>
                                         <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
                                         <td class="text-center">
@@ -242,7 +243,7 @@
                                     role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead class="bg-success">
                                         <tr>
-                                            {{-- <th class="table-plus text-white">N° Dossier</th> --}}
+                                            <th class="table-plus text-white">N° Dossier</th>
                                             <th class="table-plus text-white text-center">N° Immatriculation</th>
                                             <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
@@ -263,6 +264,7 @@
                                             $emp = DB::table('employeur')->where('no_employeur', $d->biometrie->no_employeur)->get();
                                             @endphp
 
+                                            <td class="font-weight-bold text-center">{{ $d->biometrie->no_dossier }}</td>
                                             <td class="font-weight-bold text-center">{{ $d->biometrie->no_employeur }}</td>
                                             <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
                                             <td class="text-center">
@@ -295,7 +297,7 @@
                                     role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead class="bg-success">
                                         <tr>
-                                            {{-- <th class="table-plus text-white">N° Dossier</th> --}}
+                                            <th class="table-plus text-white">N° Dossier</th>
                                             <th class="table-plus text-white text-center">N° Immatriculation</th>
                                             <th class="text-white text-center">Raison Sociale</th>
                                             {{-- <th class="text-white">Date Naissance</th>
@@ -318,6 +320,7 @@
                                                 $emp = DB::table('employeur')->where('no_employeur', $d->biometrie->no_employeur)->get();
                                                 @endphp
 
+                                                <td class="font-weight-bold text-center">{{ $d->biometrie->no_dossier }}</td>
                                                 <td class="font-weight-bold text-center">{{ $d->biometrie->no_employeur }}</td>
                                                 <td class="text-center">{{ $emp[0]->raison_sociale }}</td>
                                                 <td class="text-center">
