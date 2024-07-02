@@ -10,7 +10,7 @@
         <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: inherit"
             height="inherit">
     </div>
-    <h3>Bonjour Mme/Mr,
+    <h3>Bonjour,
 
         <p>Votre OTP est: <span style="font-weight: bold; color: red;">{{ $otp }}</span></p>
 

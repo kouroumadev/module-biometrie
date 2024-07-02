@@ -272,17 +272,6 @@
                                     <hr>
                                     <h3 class="form-title">Télécharger le fichier</h3>
                                     <div class="row">
-                                        <div class="col-6 col-md-6 col-sm-12 m-auto">
-                                            <div class="form-group">
-
-                                                <div class="form-group">
-                                                    <label>Fichier à télécharger </label>
-                                                    <input type="file" name="fichier" id="fichier"
-                                                        class="form-control-file form-control height-auto"
-                                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-3 col-md-3 col-sm-12 m-auto">
                                             <div class="form-group ">
                                                 <label>Nombre d'employé(e)</label>
@@ -290,6 +279,18 @@
                                                     class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-6 col-md-6 col-sm-12 m-auto">
+
+
+                                            <div class="form-group">
+                                                <label>Fichier à télécharger </label>
+                                                <input type="file" name="fichier" id="fichier"
+                                                    class="form-control-file form-control height-auto"
+                                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                            </div>
+
+                                        </div>
+
 
                                     </div>
                                     <div class="mb-3 form-group">
@@ -534,7 +535,7 @@
                             $('#no_employeur').removeClass("form-control-danger");
                             $('#no_employeur').addClass("form-control-success");
 
-                            // $("#nom").val(data[0].nom);
+
                             // $("#prenom").val(data[0].prenoms);
                             $("#raison_sociale_bio").val(data[0].raison_sociale);
                             $("#raison_sociale_disp").text(data[0].raison_sociale);
@@ -543,9 +544,7 @@
                             $("#no_emp_disp").text(data[0].no_employeur);
                             $("#ville_disp").text(data[0].ville);
                             $("#quartier_disp").text(data[0].quartier);
-                            $("#email_disp").text(data[0].email);
-                            $("#adresse_disp").text(data[0].adresse);
-                            $("#tel_disp").text(data[0].telephone);
+
 
                             $("#raison_sociale_recap").text(data[0].raison_sociale);
                             $("#no_emp_recap").text(data[0].no_employeur);
@@ -553,9 +552,7 @@
                             $("#no_emp_recap").text(data[0].no_employeur);
                             $("#ville_recap").text(data[0].ville);
                             $("#quartier_recap").text(data[0].quartier);
-                            $("#email_recap").text(data[0].email);
-                            $("#adresse_recap").text(data[0].adresse);
-                            $("#tel_recap").text(data[0].telephone);
+
                             $("#raison_sociale_bio").attr("readonly", true);
 
                         }
@@ -564,7 +561,19 @@
                 })
             });
 
+            $('#otp').blur(function() {
+                let email = $("#email").val();
+                let adresse = $("#adresse").val();
+                let telephone = $("#telephone").val();
 
+                $("#email_disp").text(email);
+                $("#adresse_disp").text(adresse);
+                $("#tel_disp").text(telephone);
+
+                $("#email_recap").text(email);
+                $("#adresse_recap").text(adresse);
+                $("#tel_recap").text(telephone);
+            });
             $('#telephone').blur(function() {
                 var email = $(this).val();
                 var no_employeur = $("#no_employeur").val();

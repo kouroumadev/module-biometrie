@@ -10,7 +10,7 @@
         <img src="{{ $message->embed(public_path('new logo.jpeg')) }}" alt="here logo" style="width: inherit"
             height="inherit">
     </div>
-    <h3>Bonjour Mme/Mr,
+    <h3>Bonjour,
 
         <p>Votre demande d'enrollement a bien été reçu, pour l'entreprise <strong> {{ $raison_sociale }}</strong></p>
         <p> Notre équipe vous contactera par e-mail ou téléphone pour un rendez-vous merci</p>
