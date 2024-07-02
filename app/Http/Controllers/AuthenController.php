@@ -49,6 +49,7 @@ class AuthenController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             $request->session()->put('loginId', $user->id);
+            // dd('hi');
             return redirect(route('back'));
         } else {
             return back()->with('fail', 'Invalid credentials.');

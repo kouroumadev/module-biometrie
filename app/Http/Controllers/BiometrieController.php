@@ -157,6 +157,7 @@ class BiometrieController extends Controller
 
     public function back()
     {
+        // dd('in');
         // $data = DB::table('employeur')
         //     // ->table('employeur')
         //     ->where('no_employeur', '6104000050400') #8204000010400 2504000020400 6104000030400
