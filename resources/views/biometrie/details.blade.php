@@ -126,7 +126,7 @@
                                             <span>N° Dossier:</span> {{ $data->biometrie->no_dossier }}
                                         </li>
                                         <li>
-                                            <span>Etat Dossier:</span> <span class="shining-text">{{ $sms }} </span>
+                                            <span>Etat Dossier:</span> <span class="shining-text font-weight-bold">{{ $sms }} </span>
                                             @if ($data->state == 'yes')
                                             <span><i class="icon-copy fa fa-check-circle fa-3x text-success" aria-hidden="true"></i></span>
                                             @else
