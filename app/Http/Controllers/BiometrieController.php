@@ -178,13 +178,6 @@ class BiometrieController extends Controller
 
     public function backDetails(int $id)
     {
-        // dd($id);
-        // $data = DB::table('metiemployeurer')
-        //     // ->table('employeur')
-        //     ->where('id', $id)
-        //     ->get();
-        // dd($data);
-
         $data = BioDone::find($id);
         $sms =
             $data->state == 'yes'
@@ -192,6 +185,25 @@ class BiometrieController extends Controller
                 : 'Dossier Rejeté par la Dirga';
 
         return view('biometrie.details', compact('data', 'sms'));
+    }
+    public function download(int $id)
+    {
+        // dd(Biometrie::find($id));
+        $bio = Biometrie::find($id);
+
+        // Assuming the file is stored in 'storage/app/public/excel-files'
+        $path = storage_path('app/public/bioDoc/' . $bio->fichier);
+        $fname = 'Employés-de-' . $bio->fichier;
+        // dd($fname);
+
+        // Customize headers as needed
+        $headers = [
+            'Content-Type' =>
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => 'attachment; filename=example.xlsx',
+        ];
+
+        return response()->download($path, $fname, $headers);
     }
     public function backStore(Request $request)
     {

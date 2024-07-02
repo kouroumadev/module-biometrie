@@ -133,6 +133,9 @@
                                             <span><i class="icon-copy fa fa-close fa-3x text-danger" aria-hidden="true"></i></span>
                                             @endif
                                         </li>
+                                        <li>
+                                            <span>Télécharger la liste des employés:</span> <a href="{{ route('back.download', $data->biometrie->id) }}" class="btn btn-success">TELECHARGER</a>
+                                        </li>
 
                                     </ul>
                                     <ul class="col-md-6">
