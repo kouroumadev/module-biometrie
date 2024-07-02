@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendDemande;
+use App\Mail\SendDetails;
 use App\Mail\SendEmployeur;
 use App\Models\BioDone;
 use App\Models\Biometrie;
@@ -200,13 +201,22 @@ class BiometrieController extends Controller
         $biometrie = Biometrie::find($request->biometrie_id);
         $biometrie->statut = '1';
         $biometrie->save();
+        $raison_sociale = DB::table('employeur')
+            ->where('no_employeur', $biometrie->no_employeur)
+            ->value('raison_sociale');
         // dd($mystate[0]);
         if ($mystate[0] == 'oui') {
             $state = 'yes';
             $sms = 'Dossier Validé avec succès';
+            $content =
+                'La CNSS tient a vous informez que vous etes eligible pour la biometriem et vous contactera dans les jours qui suivent.';
         } else {
             $state = 'no';
             $sms = 'Dossier rejeté avec succès';
+            $content =
+                "La CNSS tient a vous informez que vous n'etes pas eligible pour la biometrie, pour les raison suivantes: '" .
+                $request->details .
+                "'";
         }
 
         $bio = new BioDone();
@@ -215,6 +225,14 @@ class BiometrieController extends Controller
         $bio->details = $request->details;
         $bio->state = $state;
         $bio->save();
+
+        $mail_data = [
+            'name' => $raison_sociale,
+            'content' => $content,
+            'num' => $biometrie->no_dossier,
+        ];
+
+        Mail::to($biometrie->email)->send(new SendDetails($mail_data));
 
         Alert::success('ELIGIBILITE', $sms);
         return redirect(route('back'));
