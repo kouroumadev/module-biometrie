@@ -188,7 +188,9 @@
                                     </div>
 
                                     <div class="mb-3 form-group">
-                                        <button type="button" class="btn btn-primary" id="step-next-1" disabled> Suivant
+                                        <button type="button" class="btn"
+                                            style="background-color: #28a745; color:#f5f5f5" id="step-next-1" disabled>
+                                            Suivant
                                             &#65515;</button>
                                     </div>
                                 </div>
@@ -218,9 +220,13 @@
 
                                     </div>
                                     <div class="mb-3 form-group">
-                                        <button type="button" class="btn btn-primary " id="step-prev-1"> &#65513;
+                                        <button type="button" class="btn"
+                                            style="background-color: #f5f5f5; color:#28a745; border 1px solid #28a745"
+                                            id="step-prev-1"> &#65513;
                                             Precedent</button>
-                                        <button type="button" class="btn btn-primary " id="step-next-2" disabled>Suivant
+                                        <button type="button" class="btn "
+                                            style="background-color: #28a745; color:#f5f5f5" id="step-next-2"
+                                            disabled>Suivant
                                             &#65515;</button>
                                     </div>
                                 </div>
@@ -294,9 +300,13 @@
 
                                     </div>
                                     <div class="mb-3 form-group">
-                                        <button type="button" class="btn btn-primary " id="step-prev-2"> &#65513;
+                                        <button type="button" class="btn"
+                                            style="background-color: #f5f5f5; color:#28a745; border 1px solid #28a745"
+                                            id="step-prev-2"> &#65513;
                                             Precedent</button>
-                                        <button type="button" class="btn btn-primary " id="step-next-3" disabled>Suivant
+                                        <button type="button" class="btn"
+                                            style="background-color: #28a745; color:#f5f5f5" id="step-next-3"
+                                            disabled>Suivant
                                             &#65515;</button>
                                     </div>
                                 </div>
@@ -350,9 +360,13 @@
                                         </tbody>
                                     </table>
                                     <div class="mb-3 form-group">
-                                        <button type="button" class="btn btn-primary " id="step-prev-3"> &#65513;
+                                        <button type="button" class="btn "
+                                            style="background-color: #f5f5f5; color:#28a745; border 1px solid #28a745"
+                                            id="step-prev-3"> &#65513;
                                             Precedent</button>
-                                        <button type="submit" class="btn btn-success " id="step-next-4" disabled>Validé
+                                        <button type="submit" class="btn "
+                                            style="background-color: #28a745; color:#f5f5f5" id="step-next-4"
+                                            disabled>Validé
                                             &#65515;</button>
                                     </div>
                                 </div>
@@ -457,12 +471,14 @@
                 stepGroup2.style.display = "none";
                 stepGroup3.style.display = "block";
                 step3.classList.add("active");
+                console.log("step3");
             })
 
             stepNext3.addEventListener("click", () => {
                 stepGroup3.style.display = "none";
                 stepGroup4.style.display = "block";
                 step4.classList.add("active");
+                console.log("step4");
             })
 
             // stepNext4.addEventListener("click", () => {
@@ -480,11 +496,13 @@
                 stepGroup2.style.display = "block";
                 stepGroup3.style.display = "none";
                 step3.classList.remove("active");
+
             })
             stepPrev3.addEventListener("click", () => {
                 stepGroup3.style.display = "block";
                 stepGroup4.style.display = "none";
                 step4.classList.remove("active");
+
             })
             // stepPrev4.addEventListener("click", () => {
             //     stepGroup4.style.display = "block";
@@ -745,7 +763,7 @@
                             $('#step-group-2').hide();
                             $('#step-group-3').show();
 
-                            $('#step-3').addClass("active");
+                            $('#step3').addClass("active");
 
 
                         } else {
